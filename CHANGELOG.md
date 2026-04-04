@@ -8,6 +8,22 @@ All notable changes to Morning Mobility are documented here.
 
 ---
 
+## 2026-04-04 — Fix PWA installability
+
+**Summary:** The PWA was not installable on mobile due to icon path issues and manifest configuration. Moved icons to `icons/` subfolder, simplified the manifest (removed separate maskable purpose entries), updated all references in index.html and sw.js.
+
+**Changed:**
+
+- **`manifest.json`** — Simplified `name` to "Morning Mobility", removed orientation/description fields, consolidated icon entries (removed separate `purpose` declarations that some browsers reject), updated icon `src` to `icons/` subfolder.
+- **`index.html`** — Updated manifest link to absolute path `/morning-mobility/manifest.json`, updated `apple-mobile-web-app-title` to "Morning Mobility", updated all icon `href` attributes to `icons/` subfolder.
+- **`sw.js`** — Bumped cache version to v6, updated icon cache paths to `icons/` subfolder.
+- **`generate-icons.js`** — Updated output directory to `icons/`.
+- **Icons** moved from root to `icons/icon-192.png` and `icons/icon-512.png`.
+
+**Known issues:** None.
+
+---
+
 ## 2026-04-04 — PWA install support + YouTube embed fix
 
 ### Commit 3 — Add PWA manifest, service worker, icons; fix YouTube embed origin
