@@ -5,8 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mobility">
 <meta name="theme-color" content="#006934">
+<meta name="mobile-web-app-capable" content="yes">
 <title>Morning Mobility × Ilves</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -524,7 +530,7 @@ function buildCard(ex, num, isDone, dayKey) {
       </div>
       <div class="exercise-body" id="body-${ex.id}">
         <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/${ex.videoId}?rel=0&modestbranding=1" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://www.youtube.com/embed/${ex.videoId}?rel=0&modestbranding=1&origin=https://maunoahlgren.github.io" allowfullscreen loading="lazy"></iframe>
         </div>
         <ul class="cue-list">${cues}</ul>
         ${timerHtml}
@@ -637,6 +643,14 @@ function resetTimer(id, total) {
 function fmt(s) { return `${Math.floor(s/60)}:${(s%60).toString().padStart(2,'0')}`; }
 
 init();
+
+// ── Service Worker ────────────────────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/morning-mobility/sw.js')
+      .catch(err => console.warn('SW registration failed:', err));
+  });
+}
 </script>
 </body>
 </html>
