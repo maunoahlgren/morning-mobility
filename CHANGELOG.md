@@ -8,6 +8,37 @@ All notable changes to Morning Mobility are documented here.
 
 ---
 
+## 2026-04-04 — PWA install support + YouTube embed fix
+
+### Commit 3 — Add PWA manifest, service worker, icons; fix YouTube embed origin
+
+**Summary:** Made the app fully installable as a PWA on iOS and Android, added offline caching via a service worker, and fixed YouTube embeds that were blocked on GitHub Pages due to missing origin header.
+
+**Added:**
+
+- **`manifest.json`** — Web App Manifest with correct `name`, `short_name`, `start_url` (`/morning-mobility/`), `scope`, `display: standalone`, `theme_color: #006934`, `background_color: #006934`, and references to both icon sizes.
+- **`sw.js`** — Service worker using a cache-first strategy for the app shell (index.html, manifest.json, icons). YouTube and Google Fonts requests are always passed to the network. Old caches deleted on activate. Falls back to cached `index.html` for navigation requests when offline.
+- **`icon-192.png` + `icon-512.png`** — Generated with pure Node.js (no external dependencies): Ilves green background, yellow circle, green "M" lettermark. Used for both the home screen icon and the manifest.
+- **Service worker registration** added to `index.html` via `navigator.serviceWorker.register('/morning-mobility/sw.js')` on `window load`.
+- **Apple PWA meta tags added:**
+  - `apple-mobile-web-app-title` → `"Mobility"`
+  - `apple-touch-icon` → `icon-192.png`
+  - `mobile-web-app-capable` for Android Chrome
+- **`<link rel="manifest">`** linked in `<head>`.
+- **Favicon links** for 192 and 512 px PNG icons.
+
+**Fixed:**
+
+- **YouTube embed URLs** now include `&origin=https://maunoahlgren.github.io` to satisfy YouTube's domain-verification requirement and prevent "Video unavailable" errors on GitHub Pages.
+
+**Known issues / notes:**
+
+- iOS does not show a native install banner — users must manually use Share → Add to Home Screen. All required meta tags are in place.
+- YouTube video availability depends on the video IDs being publicly accessible; original IDs retained (well-known exercise demos).
+- `generate-icons.js` left in repo root for future icon regeneration; not served to users.
+
+---
+
 ## 2024 — Initial Release
 
 ### Commit 1 — Initial commit: single-page HTML app
