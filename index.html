@@ -4,392 +4,345 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#f8f6f2">
-<title>Morning Mobility</title>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#006934">
+<title>Morning Mobility × Ilves</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #f8f6f2;
-    --warm-white: #fffefb;
-    --ink: #1a1814;
-    --ink-soft: #4a4540;
-    --ink-muted: #9a9590;
-    --accent: #c8512a;
-    --accent-light: #f5ede8;
-    --skate: #2a6496;
-    --skate-light: #e8f0f7;
-    --run: #4a7c59;
-    --run-light: #eaf2ec;
-    --border: #e8e4de;
-    --shadow: 0 1px 3px rgba(26,24,20,0.08);
-    --shadow-md: 0 4px 16px rgba(26,24,20,0.10);
+    --green: #006934;
+    --green-dark: #004d25;
+    --green-light: #e6f2ec;
+    --yellow: #FFCB05;
+    --yellow-dark: #d4a800;
+    --black: #0a0a0a;
+    --white: #ffffff;
+    --grey-bg: #f4f4f0;
+    --grey-line: #ddddd8;
+    --text-soft: #555550;
+    --text-muted: #999990;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
+    font-family: 'Barlow', sans-serif;
+    background: var(--grey-bg);
+    color: var(--black);
     min-height: 100vh;
     max-width: 430px;
     margin: 0 auto;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* HEADER */
   .header {
-    background: var(--warm-white);
-    border-bottom: 1px solid var(--border);
-    padding: 20px 24px 16px;
+    background: var(--green);
     position: sticky;
     top: 0;
     z-index: 100;
   }
-  .header-top {
+  .header-inner {
+    padding: 16px 20px 10px;
     display: flex;
-    align-items: baseline;
+    align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: 4px;
   }
   .app-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    letter-spacing: -0.3px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1;
   }
-  .today-label {
-    font-size: 12px;
-    color: var(--ink-muted);
-    font-weight: 300;
+  .app-name span { color: var(--yellow); }
+  .date-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    padding-bottom: 2px;
   }
-  .day-tag {
+  .day-pill {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    margin-top: 6px;
+    margin: 0 20px 12px;
+    font-family: 'Barlow Condensed', sans-serif;
     font-size: 13px;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 20px;
-    background: var(--accent-light);
-    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
   }
-  .day-tag.skate { background: var(--skate-light); color: var(--skate); }
-  .day-tag.run { background: var(--run-light); color: var(--run); }
-  .day-tag.rest { background: var(--border); color: var(--ink-muted); }
+  .day-pill.skate { background: var(--yellow); color: var(--black); }
+  .day-pill.run { background: var(--white); color: var(--green); }
+  .day-pill.rest { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }
 
-  /* NAV TABS */
   .nav {
     display: flex;
-    background: var(--warm-white);
-    border-bottom: 1px solid var(--border);
-    padding: 0 24px;
-    gap: 0;
+    background: var(--green-dark);
   }
   .nav-tab {
     flex: 1;
-    padding: 12px 8px;
+    padding: 11px 8px;
+    font-family: 'Barlow Condensed', sans-serif;
     font-size: 13px;
-    font-weight: 500;
-    color: var(--ink-muted);
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.2s;
-    letter-spacing: 0.2px;
-  }
-  .nav-tab.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
-
-  /* MAIN CONTENT */
-  .content {
-    padding: 20px 20px 100px;
-  }
-
-  /* DAY CARDS in schedule */
-  .week-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .day-card {
-    background: var(--warm-white);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 16px 18px;
-    cursor: pointer;
-    transition: box-shadow 0.2s, transform 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .day-card:active { transform: scale(0.99); }
-  .day-card.today { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-  .day-card-left { display: flex; flex-direction: column; gap: 4px; }
-  .day-name { font-family: 'DM Serif Display', serif; font-size: 18px; }
-  .day-desc { font-size: 12px; color: var(--ink-muted); font-weight: 300; }
-  .day-badge {
-    font-size: 11px;
-    font-weight: 500;
-    padding: 3px 10px;
-    border-radius: 20px;
-  }
-  .badge-skate { background: var(--skate-light); color: var(--skate); }
-  .badge-run { background: var(--run-light); color: var(--run); }
-  .badge-rest { background: var(--border); color: var(--ink-muted); }
-  .badge-daily { background: var(--accent-light); color: var(--accent); }
-
-  /* ROUTINE VIEW */
-  .routine-header {
-    margin-bottom: 20px;
-  }
-  .routine-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 26px;
-    margin-bottom: 4px;
-  }
-  .routine-meta {
-    font-size: 13px;
-    color: var(--ink-muted);
-    font-weight: 300;
-  }
-  .section-label {
-    font-size: 11px;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: var(--ink-muted);
-    margin: 20px 0 10px;
+    color: rgba(255,255,255,0.45);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .nav-tab.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+
+  .content { padding: 16px 16px 100px; }
+
+  .start-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--yellow);
+    color: var(--black);
+    border: none;
+    border-radius: 3px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 14px;
+    transition: all 0.15s;
+  }
+  .start-btn:active { transform: scale(0.98); }
+
+  .progress-wrap {
+    background: var(--grey-line);
+    border-radius: 2px;
+    height: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
   }
 
-  /* EXERCISE CARDS */
-  .exercise-card {
-    background: var(--warm-white);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    margin-bottom: 10px;
-    overflow: hidden;
-    transition: box-shadow 0.2s;
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 20px 0 8px;
+    padding-left: 2px;
   }
-  .exercise-card.completed { opacity: 0.5; }
-  .exercise-card.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+
+  .exercise-card {
+    background: var(--white);
+    border-radius: 3px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    border-left: 4px solid transparent;
+  }
+  .exercise-card.active { border-left-color: var(--yellow); }
+  .exercise-card.completed { border-left-color: var(--green); opacity: 0.55; }
 
   .exercise-top {
     display: flex;
     align-items: center;
-    padding: 14px 16px;
+    padding: 13px 14px;
     gap: 12px;
     cursor: pointer;
   }
   .exercise-num {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--cream);
-    border: 1px solid var(--border);
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+    background: var(--grey-bg);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--ink-muted);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--text-muted);
     flex-shrink: 0;
   }
-  .exercise-card.completed .exercise-num {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-  }
+  .exercise-card.completed .exercise-num { background: var(--green); color: var(--white); }
+  .exercise-card.active .exercise-num { background: var(--yellow); color: var(--black); }
+
   .exercise-info { flex: 1; }
   .exercise-name {
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 2px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin-bottom: 1px;
   }
-  .exercise-detail {
-    font-size: 12px;
-    color: var(--ink-muted);
-    font-weight: 300;
-  }
-  .exercise-chevron {
-    color: var(--ink-muted);
-    font-size: 18px;
-    transition: transform 0.2s;
-  }
+  .exercise-detail { font-size: 12px; color: var(--text-muted); }
+  .exercise-chevron { font-size: 20px; color: var(--text-muted); transition: transform 0.2s; }
   .exercise-card.open .exercise-chevron { transform: rotate(90deg); }
 
   .exercise-body {
     display: none;
-    padding: 0 16px 16px;
-    border-top: 1px solid var(--border);
+    padding: 0 14px 14px;
+    border-top: 1px solid var(--grey-line);
   }
   .exercise-card.open .exercise-body { display: block; }
 
   .video-container {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 2px;
     overflow: hidden;
     margin: 12px 0 10px;
-    background: var(--ink);
+    background: var(--black);
     aspect-ratio: 16/9;
   }
-  .video-container iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-  }
-  .cue-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-top: 10px;
-  }
+  .video-container iframe { width: 100%; height: 100%; border: none; display: block; }
+
+  .cue-list { list-style: none; display: flex; flex-direction: column; gap: 5px; margin-top: 10px; }
   .cue-list li {
     font-size: 13px;
-    color: var(--ink-soft);
-    font-weight: 300;
-    padding-left: 16px;
+    color: var(--text-soft);
+    padding-left: 14px;
     position: relative;
     line-height: 1.5;
   }
   .cue-list li::before {
-    content: '—';
+    content: '▸';
     position: absolute;
     left: 0;
-    color: var(--accent);
-    font-size: 11px;
-    top: 1px;
+    color: var(--yellow-dark);
+    font-size: 10px;
+    top: 2px;
   }
 
-  /* TIMER */
-  .timer-section {
-    margin-top: 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .timer-section { margin-top: 14px; display: flex; align-items: center; gap: 10px; }
   .timer-display {
-    font-family: 'DM Serif Display', serif;
-    font-size: 36px;
-    color: var(--accent);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--green);
     min-width: 80px;
+    line-height: 1;
   }
   .timer-btn {
-    padding: 8px 18px;
-    border-radius: 20px;
+    padding: 9px 18px;
+    border-radius: 2px;
     border: none;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
     cursor: pointer;
     transition: all 0.15s;
   }
-  .timer-btn.start { background: var(--accent); color: white; }
-  .timer-btn.reset { background: var(--border); color: var(--ink-soft); }
+  .timer-btn.start { background: var(--green); color: var(--white); }
+  .timer-btn.reset { background: var(--grey-bg); color: var(--text-soft); }
   .timer-btn:active { transform: scale(0.97); }
 
   .done-btn {
     width: 100%;
     margin-top: 12px;
     padding: 11px;
-    border-radius: 10px;
-    border: none;
-    background: var(--cream);
-    border: 1px solid var(--border);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--ink-soft);
+    border-radius: 2px;
+    border: 2px solid var(--grey-line);
+    background: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-soft);
     cursor: pointer;
     transition: all 0.15s;
   }
-  .done-btn.marked { background: var(--accent); color: white; border-color: var(--accent); }
-  .done-btn:active { transform: scale(0.98); }
+  .done-btn.marked { background: var(--green); color: var(--white); border-color: var(--green); }
 
-  /* PROGRESS BAR */
-  .progress-bar-wrap {
-    background: var(--border);
-    border-radius: 4px;
-    height: 4px;
-    margin: 16px 0 0;
-    overflow: hidden;
-  }
-  .progress-bar-fill {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 4px;
-    transition: width 0.4s ease;
-  }
-  .progress-label {
-    font-size: 12px;
-    color: var(--ink-muted);
-    margin-top: 6px;
-    font-weight: 300;
-  }
-
-  /* START BUTTON */
-  .start-routine-btn {
-    width: 100%;
-    padding: 16px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 14px;
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
+  .week-grid { display: flex; flex-direction: column; gap: 8px; }
+  .day-card {
+    background: var(--white);
+    border-radius: 3px;
+    padding: 14px 16px;
     cursor: pointer;
-    margin-bottom: 20px;
-    transition: all 0.15s;
-    letter-spacing: 0.2px;
-  }
-  .start-routine-btn:active { transform: scale(0.98); opacity: 0.9; }
-
-  /* BACK BTN */
-  .back-btn {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--ink-muted);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin-bottom: 16px;
-    font-family: 'DM Sans', sans-serif;
+    justify-content: space-between;
+    border-left: 4px solid transparent;
   }
+  .day-card.today { border-left-color: var(--yellow); }
+  .day-card-left { display: flex; flex-direction: column; gap: 3px; }
+  .day-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .day-desc { font-size: 12px; color: var(--text-muted); }
+  .day-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .badge-skate { background: var(--yellow); color: var(--black); }
+  .badge-run { background: var(--green-light); color: var(--green); }
+  .badge-rest { background: var(--grey-bg); color: var(--text-muted); }
 
-  /* ABOUT */
+  .ilves-banner {
+    background: var(--green);
+    border-radius: 3px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ilves-banner-icon { font-size: 30px; }
+  .ilves-banner-text { font-family: 'Barlow Condensed', sans-serif; }
+  .ilves-banner-text strong { display: block; font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: var(--yellow); }
+  .ilves-banner-text span { font-size: 12px; color: rgba(255,255,255,0.65); font-weight: 400; font-family: 'Barlow', sans-serif; }
+
   .about-card {
-    background: var(--warm-white);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px;
-    margin-bottom: 12px;
+    background: var(--white);
+    border-radius: 3px;
+    padding: 16px;
+    margin-bottom: 10px;
+    border-left: 4px solid var(--yellow);
   }
   .about-card h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 17px;
-    margin-bottom: 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    color: var(--green);
   }
-  .about-card p {
-    font-size: 13px;
-    color: var(--ink-soft);
-    font-weight: 300;
-    line-height: 1.6;
-  }
+  .about-card p { font-size: 13px; color: var(--text-soft); line-height: 1.6; }
 
-  /* HIDDEN */
   .view { display: none; }
   .view.active { display: block; }
 </style>
@@ -397,11 +350,11 @@
 <body>
 
 <div class="header">
-  <div class="header-top">
-    <span class="app-name">Morning Mobility</span>
-    <span class="today-label" id="dateLabel"></span>
+  <div class="header-inner">
+    <div class="app-name">Morning <span>Mobility</span></div>
+    <div class="date-label" id="dateLabel"></div>
   </div>
-  <div id="dayTagWrap"></div>
+  <div id="dayPillWrap"></div>
 </div>
 
 <nav class="nav">
@@ -411,387 +364,158 @@
 </nav>
 
 <div class="content">
-
-  <!-- TODAY VIEW -->
-  <div id="tab-today" class="view active">
-    <div id="todayContent"></div>
-  </div>
-
-  <!-- WEEK VIEW -->
-  <div id="tab-week" class="view">
-    <div class="week-grid" id="weekGrid"></div>
-  </div>
-
-  <!-- ABOUT VIEW -->
+  <div id="tab-today" class="view active"><div id="todayContent"></div></div>
+  <div id="tab-week" class="view"><div class="week-grid" id="weekGrid"></div></div>
   <div id="tab-about" class="view">
+    <div class="ilves-banner">
+      <div class="ilves-banner-icon">🏒</div>
+      <div class="ilves-banner-text">
+        <strong>Be More Ilves</strong>
+        <span>Every day is your day if you claim it.</span>
+      </div>
+    </div>
     <div class="about-card">
       <h3>Why this routine?</h3>
-      <p>Hockey + sitting = tight hip flexors and a shortened psoas. This causes knee pain, lower back issues, and reduced stride power over time. This routine targets the root cause, not just the symptoms.</p>
+      <p>Hockey + desk work = tight hip flexors and a shortened psoas. This causes knee pain, lower back issues, and reduced stride power. This routine targets the root cause, not just the symptoms.</p>
     </div>
     <div class="about-card">
       <h3>The psoas muscle</h3>
-      <p>The psoas connects your spine to your legs and is the most important muscle you've probably never trained. When it shortens from sitting or skating in a crouched position, everything else compensates. The daily routine here addresses this directly.</p>
+      <p>The psoas connects your spine to your legs. When it shortens from sitting or skating in a crouched position, everything else compensates. The daily routine here addresses this directly.</p>
     </div>
     <div class="about-card">
       <h3>How to use this</h3>
-      <p>Open each exercise, watch the video, then use the timer. Tap "Done" when finished. Dynamic exercises (before skating/running) warm the tissue. Static stretches (after) lengthen it. Both matter. Consistency over weeks beats intensity in one session.</p>
+      <p>Open each exercise, watch the video, use the timer. Tap "Done" when finished. Dynamic exercises before skating or running warm the tissue. Static stretches after lengthen it. Both matter.</p>
     </div>
     <div class="about-card">
       <h3>Sequence matters</h3>
-      <p>The exercises are ordered intentionally — dynamic movements before static holds. Don't skip ahead. The muscle needs to be warmed before it can be lengthened effectively.</p>
+      <p>The exercises are ordered intentionally. Dynamic before static. Don't skip ahead. The muscle needs to be warmed before it can be lengthened. Consistency over weeks beats intensity in one session.</p>
     </div>
   </div>
-
 </div>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────────────────────
-
-const SKATE_DAYS = [2, 4]; // Tue=2, Thu=4
-const RUN_DAYS = [6, 0]; // Sat=6, Sun=0
+const SKATE_DAYS = [2, 4];
+const RUN_DAYS = [6, 0];
+const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
 const exercises = {
-
   daily: [
-    {
-      id: 'd1',
-      name: '90/90 Hip Stretch',
-      detail: '60–90 sec each side',
-      seconds: 90,
-      videoId: 'v4q8RHWcBvE',
-      cues: [
-        'Sit with front shin parallel, back shin at 90° behind you',
-        'Stay tall — don\'t let your chest collapse forward',
-        'Feel the stretch in the outer hip of the front leg',
-        'Switch sides and repeat'
-      ]
-    },
-    {
-      id: 'd2',
-      name: 'Couch Stretch',
-      detail: '60–90 sec each side',
-      seconds: 90,
-      videoId: 'HeRCFDal5rg',
-      cues: [
-        'Kneel with one foot up on the wall or couch behind you',
-        'Drive your hips forward gently — don\'t arch your back',
-        'You should feel it deep in the front of the back hip/thigh',
-        'Squeeze your glute on the back leg to deepen it'
-      ]
-    },
-    {
-      id: 'd3',
-      name: 'Dead Bug',
-      detail: '3 × 8 reps',
-      seconds: null,
-      videoId: 'g_BYB0R-4Ws',
-      cues: [
-        'Lie on your back, arms up, knees at 90° over hips',
-        'Press your lower back INTO the floor — keep it there',
-        'Slowly lower opposite arm and leg without losing back contact',
-        'Control the movement — slow is better than fast'
-      ]
-    },
-    {
-      id: 'd4',
-      name: 'Glute Bridge',
-      detail: '3 × 12 reps',
-      seconds: null,
-      videoId: 'OUgsJ8-Vi0E',
-      cues: [
-        'Feet flat, hip-width apart, knees at 90°',
-        'Push through your heels — not your toes',
-        'Squeeze your glutes hard at the top, hold 2 seconds',
-        'Lower slowly — don\'t just drop'
-      ]
-    }
+    { id:'d1', name:'90/90 Hip Stretch', detail:'60–90 sec each side', seconds:90, videoId:'v4q8RHWcBvE',
+      cues:['Sit with front shin parallel, back shin at 90° behind you','Stay tall — chest up','Feel the stretch in the outer hip of the front leg','Switch sides and repeat'] },
+    { id:'d2', name:'Couch Stretch', detail:'60–90 sec each side', seconds:90, videoId:'HeRCFDal5rg',
+      cues:['Kneel with one foot up on the wall or couch behind you','Drive hips forward gently — don\'t arch your back','Feel it deep in the front of the back hip','Squeeze glute on the back leg to deepen'] },
+    { id:'d3', name:'Dead Bug', detail:'3 × 8 reps', seconds:null, videoId:'g_BYB0R-4Ws',
+      cues:['Lie on back, arms up, knees at 90° over hips','Press lower back INTO the floor — keep it there','Slowly lower opposite arm and leg without losing back contact','Slow is better than fast'] },
+    { id:'d4', name:'Glute Bridge', detail:'3 × 12 reps', seconds:null, videoId:'OUgsJ8-Vi0E',
+      cues:['Feet flat, hip-width apart, knees at 90°','Push through heels — not toes','Squeeze glutes hard at the top, hold 2 seconds','Lower slowly'] }
   ],
-
   preskate: [
-    {
-      id: 'ps1',
-      name: 'Leg Swings',
-      detail: '10 reps each direction, each leg',
-      seconds: null,
-      videoId: 'tKIdBzqsVKM',
-      cues: [
-        'Hold a wall for balance',
-        'Front-to-back first, then side-to-side',
-        'Let the leg swing freely — don\'t force the range',
-        'Gradually increase the arc as you warm up'
-      ]
-    },
-    {
-      id: 'ps2',
-      name: 'Hip Circles',
-      detail: '10 reps each direction',
-      seconds: null,
-      videoId: 'mKLx9okH0oA',
-      cues: [
-        'Stand on one leg, draw big circles with the raised knee',
-        'Go slow and controlled, maximize the circle size',
-        'Both clockwise and counter-clockwise',
-        'Keep your upper body still'
-      ]
-    },
-    {
-      id: 'ps3',
-      name: 'Walking Lunges with Rotation',
-      detail: '10 steps total',
-      seconds: null,
-      videoId: 'L8fvypPrzzs',
-      cues: [
-        'Step forward into a lunge, then rotate your torso toward the front leg',
-        'Keep your front knee over your foot — not caving in',
-        'Rotate from your core, not just your arms',
-        'Alternate legs with each step'
-      ]
-    },
-    {
-      id: 'ps4',
-      name: 'Lateral Band Walks',
-      detail: '10 steps each direction (or bodyweight squat walks)',
-      seconds: null,
-      videoId: 'k6JGMbXkgW4',
-      cues: [
-        'Slight squat position, feet shoulder-width, toes forward',
-        'Step sideways — don\'t let your feet come together',
-        'Keep tension the whole time, don\'t stand up straight',
-        'No band? Do bodyweight — same position, same benefit'
-      ]
-    }
+    { id:'ps1', name:'Leg Swings', detail:'10 reps each direction, each leg', seconds:null, videoId:'tKIdBzqsVKM',
+      cues:['Hold a wall for balance','Front-to-back first, then side-to-side','Let the leg swing freely — don\'t force the range','Gradually increase the arc'] },
+    { id:'ps2', name:'Hip Circles', detail:'10 reps each direction', seconds:null, videoId:'mKLx9okH0oA',
+      cues:['Stand on one leg, draw big circles with the raised knee','Go slow and controlled','Both clockwise and counter-clockwise','Keep upper body still'] },
+    { id:'ps3', name:'Walking Lunges + Rotation', detail:'10 steps total', seconds:null, videoId:'L8fvypPrzzs',
+      cues:['Lunge forward then rotate torso toward front leg','Keep front knee over foot','Rotate from your core','Alternate legs each step'] },
+    { id:'ps4', name:'Lateral Band Walks', detail:'10 steps each direction', seconds:null, videoId:'k6JGMbXkgW4',
+      cues:['Slight squat, feet shoulder-width, toes forward','Step sideways — don\'t let feet come together','Keep tension throughout','No band? Do bodyweight — same benefit'] }
   ],
-
   postskate: [
-    {
-      id: 'pk1',
-      name: 'Pigeon Pose',
-      detail: '90 sec each side',
-      seconds: 90,
-      videoId: 'fPyPmrcNlac',
-      cues: [
-        'Front shin roughly parallel to the front of your mat',
-        'Sink your hips toward the floor — use a block/pillow if needed',
-        'Fold forward over the front leg to deepen',
-        'Breathe into the tightness — it should ease after 30 seconds'
-      ]
-    },
-    {
-      id: 'pk2',
-      name: 'Supine Figure-4 (Lying Psoas Release)',
-      detail: '60 sec each side',
-      seconds: 60,
-      videoId: 'n0RcFlzGgF8',
-      cues: [
-        'Lie on your back, cross one ankle over the opposite knee',
-        'Pull both legs toward your chest gently',
-        'Feel it in the outer hip and glute of the crossed leg',
-        'Let gravity do the work — don\'t force it'
-      ]
-    },
-    {
-      id: 'pk3',
-      name: 'Child\'s Pose with Lateral Reach',
-      detail: '60 sec each side',
-      seconds: 60,
-      videoId: 'eqVMAPM00GM',
-      cues: [
-        'Start in regular child\'s pose, arms extended',
-        'Walk both hands to one side and hold',
-        'Feel the stretch along the side of your back and lat',
-        'Take 5 slow deep breaths, then switch sides'
-      ]
-    }
+    { id:'pk1', name:'Pigeon Pose', detail:'90 sec each side', seconds:90, videoId:'fPyPmrcNlac',
+      cues:['Front shin roughly parallel to mat front','Sink hips toward floor','Fold forward over front leg to deepen','Breathe into the tightness'] },
+    { id:'pk2', name:'Supine Figure-4', detail:'60 sec each side', seconds:60, videoId:'n0RcFlzGgF8',
+      cues:['Lie on back, cross ankle over opposite knee','Pull both legs toward chest','Feel it in the outer hip','Let gravity do the work'] },
+    { id:'pk3', name:"Child's Pose + Lateral Reach", detail:'60 sec each side', seconds:60, videoId:'eqVMAPM00GM',
+      cues:['Start in child\'s pose, arms extended','Walk hands to one side and hold','Feel the stretch along your back and lat','5 slow breaths, then switch'] }
   ],
-
   prerun: [
-    {
-      id: 'pr1',
-      name: 'Leg Swings',
-      detail: '10 reps each direction, each leg',
-      seconds: null,
-      videoId: 'tKIdBzqsVKM',
-      cues: [
-        'Front-to-back loosens the hip flexors for running stride',
-        'Side-to-side opens the inner thigh — important for runners',
-        'Let momentum build naturally over 10 reps',
-        'Do this right before you step out the door'
-      ]
-    },
-    {
-      id: 'pr2',
-      name: 'Hip Circles',
-      detail: '10 reps each direction',
-      seconds: null,
-      videoId: 'mKLx9okH0oA',
-      cues: [
-        'Draw the biggest circles you can with your knee',
-        'Loosens the hip joint before impact from running',
-        'Both directions, both legs'
-      ]
-    },
-    {
-      id: 'pr3',
-      name: 'Walking Lunges with Rotation',
-      detail: '10 steps total',
-      seconds: null,
-      videoId: 'L8fvypPrzzs',
-      cues: [
-        'Activates glutes and hip flexors in the running pattern',
-        'The rotation prepares your thoracic spine',
-        'Exaggerate the reach across your body'
-      ]
-    }
+    { id:'pr1', name:'Leg Swings', detail:'10 reps each direction, each leg', seconds:null, videoId:'tKIdBzqsVKM',
+      cues:['Front-to-back loosens hip flexors for stride','Side-to-side opens the inner thigh','Let momentum build naturally','Do right before heading out'] },
+    { id:'pr2', name:'Hip Circles', detail:'10 reps each direction', seconds:null, videoId:'mKLx9okH0oA',
+      cues:['Biggest circles you can','Loosens the hip joint before impact','Both directions, both legs'] },
+    { id:'pr3', name:'Walking Lunges + Rotation', detail:'10 steps total', seconds:null, videoId:'L8fvypPrzzs',
+      cues:['Activates glutes and hip flexors in running pattern','Rotation prepares your thoracic spine','Exaggerate the reach across your body'] }
   ],
-
   postrun: [
-    {
-      id: 'prun1',
-      name: 'Couch Stretch',
-      detail: '90 sec each side',
-      seconds: 90,
-      videoId: 'HeRCFDal5rg',
-      cues: [
-        'Running shortens the hip flexors — this is the best counter-stretch',
-        'Hip forward, glute squeezed, chest tall',
-        'Don\'t rush — the first 30 seconds is just the muscle letting go'
-      ]
-    },
-    {
-      id: 'prun2',
-      name: 'Pigeon Pose',
-      detail: '90 sec each side',
-      seconds: 90,
-      videoId: 'fPyPmrcNlac',
-      cues: [
-        'Runners need this for IT band and piriformis',
-        'Fold forward to increase the intensity',
-        'Use a block or folded towel under the hip if needed'
-      ]
-    },
-    {
-      id: 'prun3',
-      name: 'Supine Figure-4',
-      detail: '60 sec each side',
-      seconds: 60,
-      videoId: 'n0RcFlzGgF8',
-      cues: [
-        'Lying down version — easier to relax into it',
-        'Also releases the glute which absorbs running impact',
-        'Breathe out as you pull the legs toward your chest'
-      ]
-    }
+    { id:'prun1', name:'Couch Stretch', detail:'90 sec each side', seconds:90, videoId:'HeRCFDal5rg',
+      cues:['Running shortens hip flexors — best counter-stretch','Hip forward, glute squeezed, chest tall','First 30 sec is just the muscle letting go'] },
+    { id:'prun2', name:'Pigeon Pose', detail:'90 sec each side', seconds:90, videoId:'fPyPmrcNlac',
+      cues:['Essential for IT band and piriformis after running','Fold forward to increase intensity','Use a towel under the hip if needed'] },
+    { id:'prun3', name:'Supine Figure-4', detail:'60 sec each side', seconds:60, videoId:'n0RcFlzGgF8',
+      cues:['Lying down — easier to fully relax','Releases the glute which absorbs running impact','Breathe out as you pull legs toward chest'] }
   ]
 };
 
-// ── SCHEDULE ──────────────────────────────────────────────────────────────────
-
-const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const dayShort = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-
-function getDayType(dayIndex) {
-  if (SKATE_DAYS.includes(dayIndex)) return 'skate';
-  if (RUN_DAYS.includes(dayIndex)) return 'run';
+function getDayType(d) {
+  if (SKATE_DAYS.includes(d)) return 'skate';
+  if (RUN_DAYS.includes(d)) return 'run';
   return 'rest';
 }
 
-function getRoutineForDay(dayType) {
-  if (dayType === 'skate') {
-    return [
-      { label: 'Daily Mobility', items: exercises.daily },
-      { label: 'Pre-Skate Warm-Up', items: exercises.preskate },
-      { label: 'Post-Skate Cool-Down', items: exercises.postskate }
-    ];
-  } else if (dayType === 'run') {
-    return [
-      { label: 'Daily Mobility', items: exercises.daily },
-      { label: 'Pre-Run Warm-Up', items: exercises.prerun },
-      { label: 'Post-Run Cool-Down', items: exercises.postrun }
-    ];
-  } else {
-    return [
-      { label: 'Daily Mobility', items: exercises.daily }
-    ];
-  }
+function getRoutine(type) {
+  if (type === 'skate') return [
+    { label:'Daily Mobility', items:exercises.daily },
+    { label:'Pre-Skate Warm-Up', items:exercises.preskate },
+    { label:'Post-Skate Cool-Down', items:exercises.postskate }
+  ];
+  if (type === 'run') return [
+    { label:'Daily Mobility', items:exercises.daily },
+    { label:'Pre-Run Warm-Up', items:exercises.prerun },
+    { label:'Post-Run Cool-Down', items:exercises.postrun }
+  ];
+  return [{ label:'Daily Mobility', items:exercises.daily }];
 }
 
-function getTotalMinutes(dayType) {
-  if (dayType === 'skate') return '~35–40';
-  if (dayType === 'run') return '~30–35';
-  return '~12–15';
-}
-
-// ── STATE ─────────────────────────────────────────────────────────────────────
-
-let completed = JSON.parse(localStorage.getItem('completed') || '{}');
+let completed = JSON.parse(localStorage.getItem('ilves_completed') || '{}');
 let openCard = null;
-let timerInterval = null;
-let timerSeconds = 0;
-let timerRunning = false;
-let currentView = 'today';
-
-// ── RENDER ────────────────────────────────────────────────────────────────────
+let activeTimers = {};
 
 function init() {
   const now = new Date();
-  const dayIndex = now.getDay();
-  const dayType = getDayType(dayIndex);
+  const di = now.getDay();
+  const type = getDayType(di);
 
-  // Header date
   document.getElementById('dateLabel').textContent =
-    now.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+    now.toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short' });
 
-  // Day tag
-  const tagEl = document.getElementById('dayTagWrap');
-  const labels = { skate: '🏒 Skate day', run: '🏃 Run day', rest: '✦ Mobility day' };
-  const tagClass = { skate: 'skate', run: 'run', rest: 'rest' };
-  tagEl.innerHTML = `<span class="day-tag ${tagClass[dayType]}">${labels[dayType]}</span>`;
+  const icons = { skate:'🏒 Skate day', run:'🏃 Run day', rest:'✦ Mobility only' };
+  document.getElementById('dayPillWrap').innerHTML =
+    `<span class="day-pill ${type}">${icons[type]}</span>`;
 
-  renderToday(dayType, dayIndex);
-  renderWeek();
+  renderToday(type, di);
+  renderWeek(di);
 }
 
-function renderToday(dayType, dayIndex) {
+function renderToday(type, di) {
   const todayKey = new Date().toDateString();
-  const sections = getRoutineForDay(dayType);
-  const totalExercises = sections.reduce((s, sec) => s + sec.items.length, 0);
-  const completedToday = sections.reduce((s, sec) =>
+  const sections = getRoutine(type);
+  const total = sections.reduce((s,sec) => s + sec.items.length, 0);
+  const done = sections.reduce((s,sec) =>
     s + sec.items.filter(ex => completed[todayKey + ex.id]).length, 0);
+  const pct = total > 0 ? Math.round((done/total)*100) : 0;
+  const mins = { skate:'~35–40 min', run:'~30–35 min', rest:'~12–15 min' }[type];
 
-  let html = `<button class="start-routine-btn" onclick="scrollToFirst()">Begin Today's Routine →</button>`;
-
-  // Progress
-  const pct = totalExercises > 0 ? Math.round((completedToday / totalExercises) * 100) : 0;
-  html += `<div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%"></div></div>`;
-  html += `<p class="progress-label">${completedToday} of ${totalExercises} done · ${getTotalMinutes(dayType)} min total</p>`;
-
-  sections.forEach(section => {
-    html += `<p class="section-label">${section.label}</p>`;
-    section.items.forEach((ex, i) => {
-      const key = todayKey + ex.id;
-      const isDone = !!completed[key];
-      html += buildExerciseCard(ex, i + 1, isDone, todayKey);
-    });
+  let html = `<button class="start-btn" onclick="scrollToFirst()">▶ Begin Today's Routine</button>`;
+  html += `<div class="progress-wrap"><div class="progress-fill" style="width:${pct}%"></div></div>`;
+  html += `<p class="progress-label">${done} of ${total} done · ${mins}</p>`;
+  sections.forEach(sec => {
+    html += `<p class="section-label">${sec.label}</p>`;
+    sec.items.forEach((ex, i) => { html += buildCard(ex, i+1, !!completed[todayKey+ex.id], todayKey); });
   });
-
   document.getElementById('todayContent').innerHTML = html;
 }
 
-function buildExerciseCard(ex, num, isDone, dayKey) {
-  const hasTimer = ex.seconds !== null;
-  const videoEmbed = `https://www.youtube.com/embed/${ex.videoId}?rel=0&modestbranding=1`;
+function buildCard(ex, num, isDone, dayKey) {
   const cues = ex.cues.map(c => `<li>${c}</li>`).join('');
-  const timerHtml = hasTimer ? `
+  const timerHtml = ex.seconds ? `
     <div class="timer-section">
-      <span class="timer-display" id="timer-${ex.id}">${formatTime(ex.seconds)}</span>
-      <button class="timer-btn start" onclick="toggleTimer('${ex.id}', ${ex.seconds})">Start</button>
-      <button class="timer-btn reset" onclick="resetTimer('${ex.id}', ${ex.seconds})">Reset</button>
+      <span class="timer-display" id="timer-${ex.id}">${fmt(ex.seconds)}</span>
+      <button class="timer-btn start" onclick="toggleTimer('${ex.id}',${ex.seconds})">Start</button>
+      <button class="timer-btn reset" onclick="resetTimer('${ex.id}',${ex.seconds})">Reset</button>
     </div>` : '';
-
   return `
-    <div class="exercise-card${isDone ? ' completed' : ''}" id="card-${ex.id}">
+    <div class="exercise-card${isDone?' completed':''}" id="card-${ex.id}">
       <div class="exercise-top" onclick="toggleCard('${ex.id}')">
-        <div class="exercise-num">${isDone ? '✓' : num}</div>
+        <div class="exercise-num">${isDone?'✓':num}</div>
         <div class="exercise-info">
           <div class="exercise-name">${ex.name}</div>
           <div class="exercise-detail">${ex.detail}</div>
@@ -800,143 +524,118 @@ function buildExerciseCard(ex, num, isDone, dayKey) {
       </div>
       <div class="exercise-body" id="body-${ex.id}">
         <div class="video-container">
-          <iframe src="${videoEmbed}" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://www.youtube.com/embed/${ex.videoId}?rel=0&modestbranding=1" allowfullscreen loading="lazy"></iframe>
         </div>
         <ul class="cue-list">${cues}</ul>
         ${timerHtml}
-        <button class="done-btn${isDone ? ' marked' : ''}" onclick="markDone('${ex.id}', '${dayKey}')">
-          ${isDone ? '✓ Done' : 'Mark as done'}
+        <button class="done-btn${isDone?' marked':''}" onclick="markDone('${ex.id}','${dayKey}')">
+          ${isDone?'✓ Done':'Mark as done'}
         </button>
       </div>
     </div>`;
 }
 
-function renderWeek() {
-  const now = new Date();
-  const todayIndex = now.getDay();
+function renderWeek(todayIndex) {
+  const desc = { skate:'Daily + Pre/Post skate · ~35 min', run:'Daily + Pre/Post run · ~30 min', rest:'Daily mobility · ~12 min' };
+  const badgeClass = { skate:'badge-skate', run:'badge-run', rest:'badge-rest' };
+  const badgeLabel = { skate:'🏒 Skate', run:'🏃 Run', rest:'Mobility' };
   let html = '';
-  for (let i = 0; i < 7; i++) {
-    const dayType = getDayType(i);
+  for (let i=0; i<7; i++) {
+    const type = getDayType(i);
     const isToday = i === todayIndex;
-    const badgeClass = { skate: 'badge-skate', run: 'badge-run', rest: 'badge-rest' };
-    const badgeLabel = { skate: '🏒 Skate', run: '🏃 Run', rest: 'Mobility only' };
-    const desc = { skate: 'Daily + Pre/Post skate · ~35 min', run: 'Daily + Pre/Post run · ~30 min', rest: 'Daily mobility · ~12 min' };
     html += `
-      <div class="day-card${isToday ? ' today' : ''}" onclick="showTab('today')">
+      <div class="day-card${isToday?' today':''}" onclick="showTab('today')">
         <div class="day-card-left">
-          <div class="day-name">${dayNames[i]}${isToday ? ' <span style="font-family:DM Sans;font-size:11px;color:var(--accent);font-weight:500">Today</span>' : ''}</div>
-          <div class="day-desc">${desc[dayType]}</div>
+          <div class="day-name">${dayNames[i]}${isToday?' <span style="font-size:11px;color:var(--green);font-family:Barlow,sans-serif;font-weight:500;text-transform:none;letter-spacing:0">← today</span>':''}</div>
+          <div class="day-desc">${desc[type]}</div>
         </div>
-        <span class="day-badge ${badgeClass[dayType]}">${badgeLabel[dayType]}</span>
+        <span class="day-badge ${badgeClass[type]}">${badgeLabel[type]}</span>
       </div>`;
   }
   document.getElementById('weekGrid').innerHTML = html;
 }
 
-// ── INTERACTIONS ──────────────────────────────────────────────────────────────
-
 function toggleCard(id) {
-  const card = document.getElementById('card-' + id);
-  const body = document.getElementById('body-' + id);
+  const card = document.getElementById('card-'+id);
+  const body = document.getElementById('body-'+id);
   if (card.classList.contains('open')) {
-    card.classList.remove('open', 'active');
+    card.classList.remove('open','active');
     body.style.display = 'none';
   } else {
     if (openCard && openCard !== id) {
-      const prev = document.getElementById('card-' + openCard);
-      const prevBody = document.getElementById('body-' + openCard);
-      if (prev) { prev.classList.remove('open', 'active'); prevBody.style.display = 'none'; }
+      const prev = document.getElementById('card-'+openCard);
+      const prevBody = document.getElementById('body-'+openCard);
+      if (prev) { prev.classList.remove('open','active'); prevBody.style.display='none'; }
     }
-    card.classList.add('open', 'active');
+    card.classList.add('open','active');
     body.style.display = 'block';
     openCard = id;
-    setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+    setTimeout(() => card.scrollIntoView({behavior:'smooth',block:'nearest'}), 100);
   }
 }
 
 function markDone(exId, dayKey) {
   const key = dayKey + exId;
   completed[key] = !completed[key];
-  localStorage.setItem('completed', JSON.stringify(completed));
-  const dayIndex = new Date().getDay();
-  renderToday(getDayType(dayIndex), dayIndex);
-  // Re-open the card
-  setTimeout(() => {
-    const card = document.getElementById('card-' + exId);
-    if (card && !completed[key]) toggleCard(exId);
-  }, 50);
+  localStorage.setItem('ilves_completed', JSON.stringify(completed));
+  const di = new Date().getDay();
+  renderToday(getDayType(di), di);
+  setTimeout(() => { if (!completed[key]) toggleCard(exId); }, 50);
 }
 
 function scrollToFirst() {
-  const firstCard = document.querySelector('.exercise-card:not(.completed)');
-  if (firstCard) {
-    firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    const id = firstCard.id.replace('card-', '');
-    if (!firstCard.classList.contains('open')) toggleCard(id);
+  const first = document.querySelector('.exercise-card:not(.completed)');
+  if (first) {
+    first.scrollIntoView({behavior:'smooth',block:'center'});
+    const id = first.id.replace('card-','');
+    if (!first.classList.contains('open')) toggleCard(id);
   }
 }
 
 function showTab(tab) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
-  const tabs = ['today', 'week', 'about'];
-  const idx = tabs.indexOf(tab);
-  document.querySelectorAll('.nav-tab')[idx].classList.add('active');
-  currentView = tab;
+  document.getElementById('tab-'+tab).classList.add('active');
+  ['today','week','about'].forEach((t,i) => {
+    if (t===tab) document.querySelectorAll('.nav-tab')[i].classList.add('active');
+  });
 }
 
-// ── TIMER ─────────────────────────────────────────────────────────────────────
-
-let activeTimers = {};
-
-function toggleTimer(id, totalSeconds) {
-  if (!activeTimers[id]) {
-    activeTimers[id] = { remaining: totalSeconds, running: false };
-  }
+function toggleTimer(id, total) {
+  if (!activeTimers[id]) activeTimers[id] = {remaining:total, running:false};
   const t = activeTimers[id];
+  const btn = document.querySelector(`[onclick="toggleTimer('${id}',${total})"]`);
   if (t.running) {
-    clearInterval(t.interval);
-    t.running = false;
-    document.querySelector(`[onclick="toggleTimer('${id}', ${totalSeconds})"]`).textContent = 'Resume';
+    clearInterval(t.interval); t.running = false;
+    if (btn) btn.textContent = 'Resume';
   } else {
     t.running = true;
-    document.querySelector(`[onclick="toggleTimer('${id}', ${totalSeconds})"]`).textContent = 'Pause';
+    if (btn) btn.textContent = 'Pause';
     t.interval = setInterval(() => {
       t.remaining--;
-      const el = document.getElementById('timer-' + id);
-      if (el) el.textContent = formatTime(t.remaining);
+      const el = document.getElementById('timer-'+id);
+      if (el) el.textContent = fmt(t.remaining);
       if (t.remaining <= 0) {
-        clearInterval(t.interval);
-        t.running = false;
-        const btn = document.querySelector(`[onclick="toggleTimer('${id}', ${totalSeconds})"]`);
-        if (btn) btn.textContent = 'Done ✓';
+        clearInterval(t.interval); t.running = false;
+        const b = document.querySelector(`[onclick="toggleTimer('${id}',${total})"]`);
+        if (b) b.textContent = 'Done ✓';
         if (el) el.textContent = '0:00';
-        // Haptic
-        if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+        if (navigator.vibrate) navigator.vibrate([200,100,200]);
       }
     }, 1000);
   }
 }
 
-function resetTimer(id, totalSeconds) {
-  if (activeTimers[id]) {
-    clearInterval(activeTimers[id].interval);
-    delete activeTimers[id];
-  }
-  const el = document.getElementById('timer-' + id);
-  if (el) el.textContent = formatTime(totalSeconds);
-  const btn = document.querySelector(`[onclick="toggleTimer('${id}', ${totalSeconds})"]`);
+function resetTimer(id, total) {
+  if (activeTimers[id]) { clearInterval(activeTimers[id].interval); delete activeTimers[id]; }
+  const el = document.getElementById('timer-'+id);
+  if (el) el.textContent = fmt(total);
+  const btn = document.querySelector(`[onclick="toggleTimer('${id}',${total})"]`);
   if (btn) btn.textContent = 'Start';
 }
 
-function formatTime(s) {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return `${m}:${sec.toString().padStart(2, '0')}`;
-}
+function fmt(s) { return `${Math.floor(s/60)}:${(s%60).toString().padStart(2,'0')}`; }
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
 init();
 </script>
 </body>
