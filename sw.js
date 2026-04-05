@@ -1,13 +1,14 @@
 // Morning Mobility — Service Worker
 // Caches the app shell for offline use. YouTube iframes still require network.
 
-const CACHE = 'morning-mobility-v7';
+const CACHE = 'morning-mobility-v8';
 const SHELL = [
   '/morning-mobility/',
   '/morning-mobility/index.html',
   '/morning-mobility/manifest.json',
   '/morning-mobility/icons/icon-192.png',
-  '/morning-mobility/icons/icon-512.png'
+  '/morning-mobility/icons/icon-512.png',
+  '/morning-mobility/icons/icon-512-maskable.png'
 ];
 
 // Install: pre-cache app shell

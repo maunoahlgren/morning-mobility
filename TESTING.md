@@ -110,7 +110,7 @@ Mark each item **Pass / Fail / N/A** and note the device/browser/OS when filing 
 | 9.3 | Open in **Chrome on Android**. Browser prompts "Add to Home screen" (or use the menu). | App installs as a PWA. |
 | 9.4 | Check the theme color in Android Chrome (or the meta tag in DevTools). | Browser toolbar matches `#006934` (Ilves green). |
 | 9.5 | Open DevTools → Application → Manifest. | Manifest loads with no errors. `name` is "Morning Mobility", `start_url` is `/morning-mobility/`, icons resolve to `icons/icon-192.png` and `icons/icon-512.png`. |
-| 9.6 | In DevTools → Application → Service Workers. | `sw.js` is registered and active. Cache name is `morning-mobility-v7`. |
+| 9.6 | In DevTools → Application → Service Workers. | `sw.js` is registered and active. Cache name is `morning-mobility-v8`. |
 | 9.7 | In DevTools → Application → Manifest → Installability. | No warnings. "Install" button is available (Chrome). |
 
 ---

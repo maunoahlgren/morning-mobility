@@ -8,6 +8,23 @@ All notable changes to Morning Mobility are documented here.
 
 ---
 
+## 2026-04-05 — Regenerate icons with canvas, fix manifest, add maskable icon
+
+**Summary:** Rewrote icon generation using the `canvas` npm package for proper font rendering. Added a dedicated maskable icon with content in the central 80%. Restored `start_url` and `scope` to absolute paths in manifest.
+
+**Changed:**
+
+- **`generate-icons.js`** — Rewritten to use `canvas` npm package instead of hand-rolled PNG encoder. Generates three icons: `icon-192.png`, `icon-512.png`, and `icon-512-maskable.png`. Design: green `#006934` background, yellow `#FFCB05` stripe (bottom 20%), bold white "M" centered above stripe. Maskable variant keeps all content within the central 80% safe zone.
+- **`manifest.json`** — Restored `start_url` and `scope` to `/morning-mobility/`. Added separate `icon-512-maskable.png` entry with `"purpose": "maskable"`. Removed the previous `purpose: maskable` override on the regular 512px icon.
+- **`sw.js`** — Bumped cache to v8, added `icon-512-maskable.png` to pre-cache list.
+- **`icons/`** — Now contains three files: `icon-192.png`, `icon-512.png`, `icon-512-maskable.png`. All generated with canvas for crisp text rendering.
+- Added `.gitignore` for `node_modules/` and `package-lock.json`.
+- Added `package.json` with `canvas` dependency for icon generation.
+
+**Known issues:** None.
+
+---
+
 ## 2026-04-05 — Fix PWA installability (full audit)
 
 **Summary:** PWA was showing "Create shortcut" instead of install prompt on Chrome Android. Root causes: absolute manifest/SW paths failing on GitHub Pages subdirectory, missing maskable icon, potentially corrupted 512px icon.
