@@ -8,17 +8,17 @@ All notable changes to Morning Mobility are documented here.
 
 ---
 
-## 2026-04-04 — Fix PWA installability
+## 2026-04-05 — Fix PWA installability (full audit)
 
-**Summary:** The PWA was not installable on mobile due to icon path issues and manifest configuration. Moved icons to `icons/` subfolder, simplified the manifest (removed separate maskable purpose entries), updated all references in index.html and sw.js.
+**Summary:** PWA was showing "Create shortcut" instead of install prompt on Chrome Android. Root causes: absolute manifest/SW paths failing on GitHub Pages subdirectory, missing maskable icon, potentially corrupted 512px icon.
 
-**Changed:**
+**Fixed:**
 
-- **`manifest.json`** — Simplified `name` to "Morning Mobility", removed orientation/description fields, consolidated icon entries (removed separate `purpose` declarations that some browsers reject), updated icon `src` to `icons/` subfolder.
-- **`index.html`** — Updated manifest link to absolute path `/morning-mobility/manifest.json`, updated `apple-mobile-web-app-title` to "Morning Mobility", updated all icon `href` attributes to `icons/` subfolder.
-- **`sw.js`** — Bumped cache version to v6, updated icon cache paths to `icons/` subfolder.
+- **`manifest.json`** — Changed `start_url` and `scope` to relative `"."` (absolute `/morning-mobility/` can fail on GitHub Pages subdirectories). Re-added maskable icon entry for Android install support. Simplified name to "Morning Mobility".
+- **`index.html`** — Changed manifest link from absolute `/morning-mobility/manifest.json` to relative `manifest.json`. Changed SW registration from absolute `/morning-mobility/sw.js` to relative `sw.js`. Updated apple-mobile-web-app-title to "Morning Mobility", icon hrefs to `icons/` subfolder.
+- **`sw.js`** — Bumped cache to v7 to pick up regenerated icons.
+- **Icons** — Regenerated via `generate-icons.js`. Previous 512px icon was 4384 bytes (suspiciously small, possibly corrupted); now 11242 bytes. Moved to `icons/` subfolder.
 - **`generate-icons.js`** — Updated output directory to `icons/`.
-- **Icons** moved from root to `icons/icon-192.png` and `icons/icon-512.png`.
 
 **Known issues:** None.
 
